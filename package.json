@@ -1,0 +1,12 @@
+{
+  "name": "vkapi",
+  "version": "0.0.1",
+  "private": true,
+  "author": "iNval_iD", 
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "4"
+  }
+}
