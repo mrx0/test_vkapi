@@ -1,47 +1,23 @@
-var util = require('util');
 
-var phrases = {
-    "Hello": "Привет",
-    "world": "мир"
-};
+var EventEmitter = require('events').EventEmitter;
 
-function PhraseError(message) {
-    this.message = message;
-    Error.captureStackTrace(this, PhraseError);
-}
-util.inherits(PhraseError, Error);
-PhraseError.prototype.name = 'PhraseError';
+var server = new EventEmitter;
 
-function HttpError(status, message) {
-    this.status = status;
-    this.message = message;
-    Error.captureStackTrace(this, HttpError);
-}
-util.inherits(HttpError, Error);
-HttpError.prototype.name = 'HttpError';
+/*server.on('request', function (request){
+    request.approved = true;
+});
 
-function getPhrases (name){
-    if (!phrases[name]){
-        throw new PhraseError(500, "Нет такой фразы: " + name);
-    }
-    return phrases[name];
-}
+server.on('request', function (request){
+    console.log(request);
+});
 
-function makePage(url){
-    if (url != 'index.html'){
-        throw new HttpError(404, "Нет такой страницы");
-    }
-    return util.format("%s, %s!", getPhrases("1Hello"), getPhrases("world"));
-}
+server.emit('request', {from: "Клиент"});
 
-try {
-    var page = makePage('index.html');
-    console.log(page);
-} catch (e){
-    if (e instanceof HttpError){
-        console.log(e.status, e.message);
-    }else{
-        console.log("Ошибка %s\n сообщение: %s\n стек: %s", e.name, e.message, e.stack);
-    }
-}
+server.emit('request', {from: "Ещё Клиент"});
+*/
 
+server.on('error', function (err){
+    console.log(err);
+});
+
+server.emit('error', new Error('серверная ошибка'));
