@@ -1,11 +1,24 @@
 var util = require('util');
 
-var obj = {
-    a:5,
-    b:6,
-
+var phrases = {
+    "Hello": "Привет",
+    "world": "мир"
 };
 
-obj.self =obj;
+function getPhrases (name){
+    if (!phrases[name]){
+        throw new Error("Нет такой фразы: " + name);
+    }
+    return phrases[name];
+}
 
-console.log(util.inspect(obj));
+function makePage(url){
+    if (url != 'index.html'){
+        throw new Error("Нет такой страницы");
+    }
+    return util.format("%s, %s!". getPhrases("Hello"), getPhrases("world"));
+}
+
+var page = makePage('index.html');
+
+console.log(page);
