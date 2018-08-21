@@ -16,7 +16,7 @@ function makePage(url){
     if (url != 'index.html'){
         throw new Error("Нет такой страницы");
     }
-    return util.format("%s, %s!". getPhrases("Hello"), getPhrases("world"));
+    return util.format("%s, %s!", getPhrases("Hello"), getPhrases("world"));
 }
 
 var page = makePage('index.html');
