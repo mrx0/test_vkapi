@@ -1,0 +1,98 @@
+
+
+/*Captcha*/
+.captcha_input{
+	margin: 5px;
+	padding: 0 2px;
+	width: 70px;
+	height: 22px;
+	color: #404040;
+	background: white;
+	border: 1px solid;
+	border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+	border-radius: 2px;
+	outline: 2px solid #eff4f7;
+	-moz-outline-radius: 3px;
+	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+	text-align: center;
+    font-size: 110%;
+    font-weight: bold;
+    color: rgb(2, 57, 162);
+}
+.captcha_input:focus{
+	border-color: #7dc9e2;
+	outline-color: #dceefc;
+	outline-offset: 0;
+}
+
+.error_captcha {
+	color: red;
+	font-size: 80%;
+}
+
+/*Кнопки*/
+.b {
+	margin: 5px 2px;
+	font-size: 90%;
+    /*border: 1px solid #BFBCB5; /* Рамка */
+    display: inline-block;
+    padding: 2px 7px; /* Поля */
+    text-decoration: none; /* Убираем подчёркивание */
+    color: rgb(60, 59, 59); /* Цвет текста */
+	border: 1px solid #BFBCB5;
+	vertical-align:middle;
+	background-color: rgba(232, 228, 228, 0.74);
+	
+	cursor:pointer;
+}
+
+.b:hover{
+    /* box-shadow: 0 0 5px rgba(0,0,0,0.3); */
+    /*background: linear-gradient(to bottom, rgba(177, 177, 177, 0.58), rgb(255, 255, 234));*/
+    background-color: rgba(232, 228, 228, 1);
+    color: rgb(234, 62, 132);
+}
+
+.b:active{
+    
+}
+
+.b:focus{
+    
+}
+
+/*Overlay*/
+#overlay {
+	z-index: 100; /* подложка должна быть выше слоев элементов сайта, но ниже слоя модального окна */
+	position: fixed; /* всегда перекрывает весь сайт */
+	background-color: rgba(59, 101, 93, 0.4); /* черная */
+	/*opacity: 0.8; /* но немного прозрачна */
+	width: 100%;
+	height: 100%; /* размером во весь экран */
+	top: 0;
+	left: 0; /* сверху и слева 0, обязательные свойства! */
+	/*cursor: pointer;*/
+	display: none; /* в обычном состоянии её нет) */
+}
+
+#central_block_in_overlay {
+	position: relative;
+	margin: 150px auto 0 auto;
+	padding: 20px 20px 20px;
+	width: 310px;
+	background: white;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+	text-align: center;
+}
+
+.overlay_close {
+    position: absolute;
+    right: 30%;
+    top: 10px;
+	cursor: pointer;
+	font-size: 300%;
+	color: rgb(245, 241, 241);
+}

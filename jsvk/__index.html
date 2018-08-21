@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.1//EN">
+<html>
+<head>
+	<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+	<script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
+</head>
+<body>
+
+<div id="res"></div>
+
+
+<script>
+
+	//Регистрация, получение токена
+	//https://oauth.vk.com/authorize?client_id=6643746&display=page&redirect_uri=&scope=notifications,video,audio,friends,wall&response_type=token&v=5.52
+	
+	var token = '3269b0b9d95f516e7b32739ee168658d7de4c1dd4776f9d9bd226e04e7c9304e1e872ec863535732d5e7a';
+
+	var all_liked_videos = [];
+	var owner_id = 0;
+	var item_id = 0;
+	
+	function deleteLike (token, owner_id, item_id){
+
+		/*var reqData = {
+			owner_id: owner_id,
+			item_id: item_id
+		};*/
+		
+		var obj;
+	
+		$.ajax({
+			//Пробуем удалить лайк с видео/фото по его id
+			url: 'https://api.vk.com/method/likes.delete?type=photo&owner_id='+owner_id+'&item_id='+item_id+'&access_token='+token+'&v=5.52',
+			method: 'GET',
+			dataType: 'JSON',
+			async: false,
+			complete: function (res){
+				console.log (res);
+
+				/*if (res.error == undefined){
+					console.log ('-----'+item_id+'-----');
+					console.log (res);
+				}else{
+					console.log ('-----'+item_id+'-----');
+					console.log (res.error);
+					console.log (res.error.captcha_img);
+					if (res.error.captcha_img != undefined){
+						$('#res').append ('<img src='+res.error.captcha_img+'>');
+					}
+				}*/
+				
+				obj = res;
+				console.log (obj);
+			}
+		});
+		console.log (obj);
+
+		return obj;
+
+		
+	}
+	
+	$.ajax({
+		//url: 'https://api.vk.com/method/friends.search?count=500&user_id=148681572&v=5.52'
+		//получаем Список друзей
+		//url: 'https://api.vk.com/method/friends.search?count=500&access_token='+token+'&v=5.52',
+		//Получаем список видеозаписей, где пользователь поставил лайк
+		//url: 'https://api.vk.com/method/fave.getVideos?count=10000&access_token='+token+'&v=5.52',
+		//Получаем список фотографий, где пользователь поставил лайк
+		url: 'https://api.vk.com/method/fave.getPhotos?count=3&access_token='+token+'&v=5.52',
+		method: 'GET',
+		dataType: 'JSONP',
+		success: function (res){
+			console.log (res);
+			//console.log (res.response.items);
+			
+			all_liked_videos = res.response.items;
+			//console.log (all_liked_videos);
+			
+			/*for (i=0; i<all_liked_videos.length; i++) {
+				//console.log(all_liked_videos[i].id);
+				//console.log(all_liked_videos[i].owner_id);
+				
+				owner_id = all_liked_videos[i].owner_id;
+				item_id = all_liked_videos[i].id
+				
+				setTimeout(function() {
+					$.ajax({
+						//Пробуем удалить лайк с видео по его id
+						url: 'https://api.vk.com/method/likes.delete?type=video&owner_id='+owner_id+'&item_id='+item_id+'&access_token=e7c0c22224b1b991f07efef23e243ec1e53fc86354cc2bf41ec8ec4bde71f097eb28b22ec60eadf163081&v=5.52',
+						method: 'GET',
+						dataType: 'JSONP',
+						success: function (res){
+							//console.log (res);
+							
+							setTimeout(function(){
+								if (res.error == undefined){
+									console.log ('-----'+item.id+'-----');
+									console.log (res);
+								}else{
+									console.log ('-----'+item.id+'-----');
+									console.log (res.error);
+									console.log (res.error.captcha_img);
+									if (res.error.captcha_img != undefined){
+										$('#res').append ('<img src='+res.error.captcha_img+'>');
+									}
+								}
+							}, 1000);
+						}
+					});
+				}, 1000);
+			}*/			
+			
+			for (i=0; i<all_liked_videos.length; i++) {
+				console.log(all_liked_videos[i].id);
+				//console.log(all_liked_videos[i].owner_id);
+				
+				owner_id = all_liked_videos[i].owner_id;
+				item_id = all_liked_videos[i].id
+
+				//console.log(arr);
+				//console.log(i);
+				console.log(item_id);
+				
+				//if (!deleteLike (token, owner_id, item_id)) break;				
+				
+				//console.log(deleteLike (token, owner_id, item_id));
+
+            }
+			console.log ('Fin');
+		}
+	});
+	
+</script>
+
+</body>
+</html>

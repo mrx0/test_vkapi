@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.1//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<link rel="stylesheet" href="css/style.css">
+	
+	<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+	<script src="https://vk.com/js/api/xd_connection.js?2"></script>
+
+</head>
+<body>
+
+	<div id="res"></div>
+	<div id="errors" style="color: red;"></div>
+	<div id="action"><input type="button" id="stop_start" class="b" value="Запустить"></div>
+	
+	<!-- Подложка только одна -->
+	<div id="overlay">
+		<div class="overlay_close">
+			<i class="fa fa-times" aria-hidden="true"></i>
+		</div>
+		<div id="overlay_data"></div>
+	</div>
+
+
+
+<script>
+	
+	// !!! надо убрать в сессию
+	var token = '9afa61a6d46eccab4643fc30f38f05d1b5a59bc90fa14bec0dc7485c939fe9c91967ddecf976956452087';
+	// !!! надо убрать в сессию
+	var reqData_session = {};
+	// !!! надо убрать в сессию
+	var url_session = '';
+	// !!! надо убрать в config
+	var api_version = '5.80';
+	// !!! надо убрать в config
+	//var speed = 1;
+	var speed = 1;
+	
+	var type = 'photo';
+
+	var items_count = 0;
+	var deleted_items = 0;
+	
+	var STOP_IT_NOW = true;
+		
+
+
+	$(document).ready(function(){
+	
+		clearAllDivs ();
+		
+	});
+	
+
+
+	
+</script>
+
+<script src="js/functions.js"></script>
+<script src="js/api.js"></script>
+
+</body>
+</html>
