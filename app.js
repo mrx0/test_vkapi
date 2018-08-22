@@ -1,23 +1,32 @@
 
-var EventEmitter = require('events').EventEmitter;
+var http = require ('http');
+var url = require ('url');
 
-var server = new EventEmitter;
+var server = new http.Server(function (req, res) {
 
-/*server.on('request', function (request){
-    request.approved = true;
+    console.log(req.headers);
+
+    console.log(req.method, req.url);
+
+    var urlParsed = url.parse(req.url, true);
+
+    console.log(urlParsed);
+
+    if (urlParsed.pathname == '/echo' && urlParsed.query.message){
+        //Чтобы не кэшировалось
+        res.setHeader('Cache-control', 'no-cache, no-store, must-revalidate');
+        //res.statusCode = 200;
+        res.end(urlParsed.query.message);
+    }else{
+        res.statusCode = 404;
+        res.end("Page not found");
+    }
 });
 
-server.on('request', function (request){
-    console.log(request);
-});
+server.listen(1337, '127.0.0.1');
 
-server.emit('request', {from: "Клиент"});
+/*var counter = 0;
 
-server.emit('request', {from: "Ещё Клиент"});
-*/
-
-server.on('error', function (err){
-    console.log(err);
-});
-
-server.emit('error', new Error('серверная ошибка'));
+server.on('request', function(req, res){
+    res.end("Hello, world!" + ++counter);
+});*/
