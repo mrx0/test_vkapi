@@ -1,39 +1,18 @@
-/*Что-то тут не работает на сервере удаленном,
- забил, чтоб перейти дальше,
- потом разберемся
-  */
 
+var http = require('http');
+var url = require('url');
 
-console.log("Let's do it");
+var server = http.createServer();
 
-var http = require ('http');
-var url = require ('url');
-
-var server = new http.Server(function (req, res) {
-
-    console.log(req.headers);
-
-    console.log(req.method, req.url);
-
+server.on('request', function (req, res){
     var urlParsed = url.parse(req.url, true);
 
-    console.log(urlParsed);
-
-    if (urlParsed.pathname == '/echo' && urlParsed.query.message){
-        //Чтобы не кэшировалось
-        res.setHeader('Cache-control', 'no-cache, no-store, must-revalidate');
-        //res.statusCode = 200;
-        res.end(urlParsed.query.message);
-    }else{
-        res.statusCode = 404;
-        res.end("Page not found");
+    if (req.method == 'GET' && urlParsed.pathname == '/echo' && urlParsed.query.message){
+        res.end(urlParsed.query.message + 1);
     }
+
+    res.statusCode = 404;
+    res.end('Not Found');
 });
 
-server.listen(1337, 'localhost');
-
-/*var counter = 0;
-
-server.on('request', function(req, res){
-    res.end("Hello, world!" + ++counter);
-});*/
+server.listen(1337);
