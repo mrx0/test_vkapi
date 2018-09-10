@@ -9,8 +9,12 @@ var log = require('libs/log')(module);
 
 var app = express();
 //app.set('port', process.env.PORT || 3000);
-app.set('port', config.get('port'));
+//app.set('port', config.get('port'));
 
+app.set('views', path.join(__dirname, 'templates'));
+app.set('view engine', 'ejs');
+
+/*
 http.createServer(app).listen(app.get('port'), function(){
 
     //console.log('Express server listening on port ' + config.get('port'));
@@ -55,6 +59,34 @@ app.use(function(req, res, next) {
 app.use(function(req, res){
   res.send(404, "Page not found");
 });
+*/
+
+
+app.use(express.favicon());
+
+if (app.get('env') == 'development'){
+    app.use(express.logger('dev'));
+}else{
+    app.use(express.logger('default'));
+}
+
+//app.use(express.json());
+//app.use(express.urlencoded());
+app.use(express.bodyParser());
+
+//app.use(express.session({ secret: 'your secret here' }));
+app.use(express.cookieParser('your secret here'));
+//app.use(express.session());
+
+app.use(app.router);
+
+app.get('/', function(req, res, next) {
+    res.render("index", {
+        body: "<b>Hello</b>"
+    });
+});
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Свой обработчик ошибок
 app.use(function(err, req, res, next) {
@@ -75,20 +107,19 @@ var user = require('./routes/user');
 
 
 // all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(express.session({ secret: 'your secret here' }));
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+
+
+
 
 app.get('/', routes.index);
 app.get('/users', user.list);
 
 */
+
+http.createServer(app).listen(config.get('port'), function(){
+
+    //console.log('Express server listening on port ' + config.get('port'));
+    log.info('Express server listening on port ' + config.get('port'));
+
+});
 
