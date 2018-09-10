@@ -11,9 +11,6 @@ var app = express();
 //app.set('port', process.env.PORT || 3000);
 app.set('port', config.get('port'));
 
-
-
-/*
 http.createServer(app).listen(app.get('port'), function(){
 
     //console.log('Express server listening on port ' + config.get('port'));
@@ -58,7 +55,6 @@ app.use(function(req, res, next) {
 app.use(function(req, res){
   res.send(404, "Page not found");
 });
-*/
 
 //Свой обработчик ошибок
 app.use(function(err, req, res, next) {
