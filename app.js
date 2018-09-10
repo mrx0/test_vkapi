@@ -3,14 +3,22 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 
+var config = require('config');
 
+var log = require('libs/log')(module);
 
 var app = express();
 //app.set('port', process.env.PORT || 3000);
-app.set('port', 3000);
+app.set('port', config.get('port'));
 
+
+
+/*
 http.createServer(app).listen(app.get('port'), function(){
-    console.log('Express server listening on port ' + app.get('port'));
+
+    //console.log('Express server listening on port ' + config.get('port'));
+    log.info('Express server listening on port ' + config.get('port'));
+
 });
 
 //Middleware
@@ -50,6 +58,7 @@ app.use(function(req, res, next) {
 app.use(function(req, res){
   res.send(404, "Page not found");
 });
+*/
 
 //Свой обработчик ошибок
 app.use(function(err, req, res, next) {
